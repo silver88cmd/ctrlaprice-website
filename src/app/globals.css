@@ -100,16 +100,34 @@ textarea {
 }
 
 .hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   min-height: 470px;
   display: flex;
   align-items: center;
   color: white;
-  background:
-    linear-gradient(90deg, rgba(12, 29, 52, .96), rgba(20, 43, 74, .78)),
-    #142b4a;
+  background-color: #142b4a;
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(9, 24, 44, .94) 0%,
+      rgba(13, 34, 59, .82) 48%,
+      rgba(13, 34, 59, .48) 100%
+    ),
+    linear-gradient(0deg, rgba(9, 24, 44, .24), rgba(9, 24, 44, .08)),
+    url("/images/controltrading.jpg");
+  background-position: center, center, center 46%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.hero .eyebrow {
+  color: #f0c46e;
 }
 
 .hero-content {
+  width: 100%;
   padding-top: 65px;
   padding-bottom: 65px;
 }
@@ -757,6 +775,16 @@ textarea {
 
   .hero {
     min-height: 400px;
+    background-image:
+      linear-gradient(
+        90deg,
+        rgba(9, 24, 44, .9) 0%,
+        rgba(13, 34, 59, .76) 65%,
+        rgba(13, 34, 59, .58) 100%
+      ),
+      linear-gradient(0deg, rgba(9, 24, 44, .24), rgba(9, 24, 44, .08)),
+      url("/images/controltrading.jpg");
+    background-position: center, center, 58% center;
   }
 
   .category-grid,
