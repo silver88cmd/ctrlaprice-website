@@ -1,12 +1,9 @@
 import Link from "next/link";
 import ProductCard from "../components/product_card";
-import { getCategories, getProducts } from "@/lib/products";
+import { getProducts } from "@/lib/products";
 
 export default async function HomePage() {
-  const [products, categories] = await Promise.all([
-    getProducts(8),
-    getCategories(),
-  ]);
+  const products = await getProducts(8);
 
   return (
     <>
@@ -29,36 +26,6 @@ export default async function HomePage() {
             Explore Products →
           </Link>
         </div>
-      </section>
-
-      <section className="section container">
-        <div className="section-heading">
-          <div>
-            <p className="eyebrow">BROWSE COLLECTION</p>
-            <h2>Shop by Category</h2>
-          </div>
-
-          <Link href="/products" className="text-link">
-            View all products →
-          </Link>
-        </div>
-
-        {categories.length > 0 ? (
-          <div className="category-grid">
-            {categories.slice(0, 6).map((category) => (
-              <Link
-                key={category}
-                href={`/products?category=${encodeURIComponent(category)}`}
-                className="category-card"
-              >
-                <span>{category}</span>
-                <span>→</span>
-              </Link>
-            ))}
-          </div>
-        ) : (
-          <p className="muted">Product categories will appear here.</p>
-        )}
       </section>
 
       <section className="section section-muted">

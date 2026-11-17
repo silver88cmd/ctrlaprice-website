@@ -264,6 +264,7 @@ textarea {
 }
 
 .product-image {
+  position: relative;
   height: 210px;
   display: flex;
   justify-content: center;
@@ -272,6 +273,23 @@ textarea {
   color: var(--muted);
   font-size: 13px;
   overflow: hidden;
+}
+
+.stock-status-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  max-width: calc(100% - 24px);
+  padding: 7px 10px;
+  border: 1px solid #f3b7b2;
+  border-radius: 999px;
+  background: #fff0ef;
+  color: #a32118;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(111, 22, 16, .12);
 }
 
 .product-image img {

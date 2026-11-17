@@ -72,10 +72,6 @@ async function ProductDetailsContent({ params }: Props) {
               <strong>{product.brand || "—"}</strong>
             </div>
             <div>
-              <span>Category</span>
-              <strong>{product.category || "—"}</strong>
-            </div>
-            <div>
               <span>Item Source</span>
               <strong>{product.item_source || "—"}</strong>
             </div>
@@ -84,9 +80,11 @@ async function ProductDetailsContent({ params }: Props) {
               <strong>{product.unit || "—"}</strong>
             </div>
             <div>
-              <span>Quantity</span>
+              <span>Stock</span>
               <strong>
-                {product.quantity ?? "—"}
+                {product.quantity === 0
+                  ? "No stock available"
+                  : product.quantity ?? "—"}
               </strong>
             </div>
           </div>

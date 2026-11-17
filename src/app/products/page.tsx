@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import ProductCard from "../../components/product_card";
 import { supabase } from "@/lib/supabase";
-import { getBrands, getCategories, type Product } from "@/lib/products";
+import { getBrands, type Product } from "@/lib/products";
 
 const PAGE_SIZE = 12;
 
@@ -64,7 +64,6 @@ function ProductCatalogSkeleton() {
 async function ProductsPageContent({ searchParams }: Props) {
   const params = await searchParams;
   const search = params.q?.trim() ?? "";
-  const category = params.category ?? "";
   const brand = params.brand?.trim() ?? "";
   const requestedPage = Number.parseInt(params.page ?? "1", 10);
   const currentPage =
@@ -82,18 +81,13 @@ async function ProductsPageContent({ searchParams }: Props) {
     );
   }
 
-  if (category) {
-    query = query.eq("category", category);
-  }
-
   if (brand) {
     query = query.eq("brand", brand);
   }
 
   const from = (currentPage - 1) * PAGE_SIZE;
-  const [{ data, error, count }, categories, brands] = await Promise.all([
+  const [{ data, error, count }, brands] = await Promise.all([
     query.range(from, from + PAGE_SIZE - 1),
-    getCategories(),
     getBrands(),
   ]);
 
@@ -120,26 +114,13 @@ async function ProductsPageContent({ searchParams }: Props) {
           className="search-input"
         />
 
-        <select
-          name="category"
-          defaultValue={category}
-          className="category-select"
-        >
-          <option value="">All Categories</option>
-          {categories.map((item) => (
-            <option key={item} value={item}>
-              {item}
-            </option>
-          ))}
-        </select>
-
         {brand && <input type="hidden" name="brand" value={brand} />}
 
         <button className="button button-dark" type="submit">
           Search
         </button>
 
-        {(search || category || brand) && (
+        {(search || brand) && (
           <Link href="/products" className="clear-link">
             Clear filters
           </Link>
@@ -148,7 +129,7 @@ async function ProductsPageContent({ searchParams }: Props) {
 
       <nav className="brand-tabs" aria-label="Filter products by brand">
         <Link
-          href={buildProductsHref({ search, category })}
+          href={buildProductsHref({ search })}
           className={`brand-tab${brand ? "" : " brand-tab-active"}`}
           aria-current={brand ? undefined : "page"}
         >
@@ -159,7 +140,6 @@ async function ProductsPageContent({ searchParams }: Props) {
             key={item}
             href={buildProductsHref({
               search,
-              category,
               brand: item,
             })}
             className={`brand-tab${brand === item ? " brand-tab-active" : ""}`}
@@ -177,7 +157,6 @@ async function ProductsPageContent({ searchParams }: Props) {
         </p>
         <div>
           {brand && <span>Brand: {brand}</span>}
-          {category && <span>Category: {category}</span>}
         </div>
       </div>
 
@@ -204,7 +183,6 @@ async function ProductsPageContent({ searchParams }: Props) {
             <Link
               href={buildProductsHref({
                 search,
-                category,
                 brand,
                 page: currentPage - 1,
               })}
@@ -222,7 +200,6 @@ async function ProductsPageContent({ searchParams }: Props) {
             <Link
               href={buildProductsHref({
                 search,
-                category,
                 brand,
                 page: currentPage + 1,
               })}
@@ -241,18 +218,15 @@ async function ProductsPageContent({ searchParams }: Props) {
 
 function buildProductsHref({
   search,
-  category,
   brand,
   page,
 }: {
   search?: string;
-  category?: string;
   brand?: string;
   page?: number;
 }) {
   const params = new URLSearchParams();
   if (search) params.set("q", search);
-  if (category) params.set("category", category);
   if (brand) params.set("brand", brand);
   if (page && page > 1) params.set("page", String(page));
 
