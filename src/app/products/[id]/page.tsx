@@ -96,10 +96,6 @@ async function ProductDetailsContent({ params }: Props) {
               <strong>{product.brand || "—"}</strong>
             </div>
             <div>
-              <span>Item Source</span>
-              <strong>{product.item_source || "—"}</strong>
-            </div>
-            <div>
               <span>Unit</span>
               <strong>{product.unit || "—"}</strong>
             </div>
