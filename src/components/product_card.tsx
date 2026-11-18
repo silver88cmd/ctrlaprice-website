@@ -27,7 +27,9 @@ export default function ProductCard({
         <div className="product-info">
           <p className="product-brand">{product.brand || "CTRLA"}</p>
 
-          <h3>{product.product_name || "Unnamed Product"}</h3>
+          <h3 className="product-name">
+            {product.product_name || "Unnamed Product"}
+          </h3>
 
           <p className="product-number">Item No. {product.item_number}</p>
 

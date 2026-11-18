@@ -10,16 +10,40 @@ type Props = {
 export default function ProductDetailsPage({ params }: Props) {
   return (
     <Suspense
-      fallback={
-        <section className="section container">
-          <div className="details-layout">
-            <p className="muted">Loading product details…</p>
-          </div>
-        </section>
-      }
+      fallback={<ProductDetailsSkeleton />}
     >
       <ProductDetailsContent params={params} />
     </Suspense>
+  );
+}
+
+function ProductDetailsSkeleton() {
+  return (
+    <section
+      className="section container"
+      aria-busy="true"
+      aria-label="Loading product details"
+    >
+      <span className="skeleton skeleton-back-link" />
+      <div className="details-layout">
+        <div className="skeleton details-image details-skeleton-image" />
+        <div className="details-info details-skeleton-info">
+          <span className="skeleton skeleton-line skeleton-detail-brand" />
+          <span className="skeleton skeleton-line skeleton-detail-title" />
+          <span className="skeleton skeleton-line skeleton-detail-number" />
+          <span className="skeleton skeleton-line skeleton-detail-price" />
+          <div className="details-skeleton-table">
+            {Array.from({ length: 4 }, (_, index) => (
+              <div key={index}>
+                <span className="skeleton skeleton-line skeleton-detail-label" />
+                <span className="skeleton skeleton-line skeleton-detail-value" />
+              </div>
+            ))}
+          </div>
+          <span className="skeleton skeleton-detail-button" />
+        </div>
+      </div>
+    </section>
   );
 }
 
