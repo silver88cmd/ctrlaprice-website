@@ -56,7 +56,7 @@ export default function ProductCard({
               </span>
               <strong className="product-price">
                 {product.selling_price != null
-                  ? `P ${Number(product.selling_price).toLocaleString("en-PH", {
+                  ? `₱${Number(product.selling_price).toLocaleString("en-PH", {
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2,
                     })}`
