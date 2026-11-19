@@ -21,9 +21,6 @@ export default function ProductCard({
           ) : (
             <span>No image available</span>
           )}
-          {product.quantity != null && product.quantity <= 0 && (
-            <span className="stock-status-badge">No stock available</span>
-          )}
         </div>
 
         <div className="product-info">
