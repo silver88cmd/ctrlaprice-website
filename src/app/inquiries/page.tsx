@@ -40,7 +40,7 @@ async function InquiriesPageContent({ searchParams }: Props) {
           </p>
         </div>
 
-        <InquiryForm productItem={item} />
+        <InquiryForm key={item} productItem={item} />
       </div>
     </section>
   );

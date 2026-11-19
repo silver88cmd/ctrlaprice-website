@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { getProduct } from "@/lib/products";
+import AddToCartButton from "@/components/add-to-cart-button";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -115,6 +116,14 @@ async function ProductDetailsContent({ params }: Props) {
           >
             Inquire About This Product →
           </Link>
+          <AddToCartButton
+            product={{
+              itemNumber: product.item_number,
+              name: product.product_name ?? "",
+              brand: product.brand ?? "",
+              sellingPrice: product.selling_price,
+            }}
+          />
         </div>
       </div>
     </section>
