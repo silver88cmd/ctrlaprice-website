@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Product } from "@/lib/products";
 import AddToCartButton from "@/components/add-to-cart-button";
+import UiIcon from "@/components/ui-icon";
 
 export default function ProductCard({
   product,
@@ -20,7 +21,7 @@ export default function ProductCard({
           ) : (
             <span>No image available</span>
           )}
-          {product.quantity === 0 && (
+          {product.quantity != null && product.quantity <= 0 && (
             <span className="stock-status-badge">No stock available</span>
           )}
         </div>
@@ -32,18 +33,42 @@ export default function ProductCard({
             {product.product_name || "Unnamed Product"}
           </h3>
 
-          <p className="product-number">Item No. {product.item_number}</p>
+          <p className="product-number">
+            <UiIcon name="tag" size={14} />
+            <span>Item No. {product.item_number}</span>
+          </p>
 
           <div className="product-card-bottom">
-            <strong>
-              {product.selling_price != null
-                ? `₱${Number(product.selling_price).toLocaleString("en-PH", {
-                    minimumFractionDigits: 2,
-                  })}`
-                : "Price on request"}
-            </strong>
-
-            <span>View details →</span>
+            <div className="product-stock-price">
+              <span
+                className={`product-stock${
+                  product.quantity != null && product.quantity <= 0
+                    ? " product-stock-empty"
+                    : ""
+                }`}
+              >
+                <UiIcon name="box" size={15} />
+                {product.quantity == null
+                  ? "Stock on request"
+                  : product.quantity <= 0
+                    ? "Out of stock"
+                    : `${product.quantity} available`}
+              </span>
+              <span className="product-price-separator" aria-hidden="true">
+                •
+              </span>
+              <strong className="product-price">
+                {product.selling_price != null
+                  ? `P ${Number(product.selling_price).toLocaleString("en-PH", {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}`
+                  : "Price on request"}
+              </strong>
+            </div>
+            <span className="product-view">
+              View details <UiIcon name="arrow-right" size={14} />
+            </span>
           </div>
         </div>
       </Link>

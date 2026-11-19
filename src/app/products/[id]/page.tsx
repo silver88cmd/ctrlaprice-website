@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { getProduct } from "@/lib/products";
 import AddToCartButton from "@/components/add-to-cart-button";
+import UiIcon from "@/components/ui-icon";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -65,7 +66,8 @@ async function ProductDetailsContent({ params }: Props) {
   return (
     <section className="section container">
       <Link href="/products" className="back-link">
-        ← Back to Products
+        <UiIcon name="arrow-right" size={15} />
+        Back to Products
       </Link>
 
       <div className="details-layout">
@@ -86,6 +88,7 @@ async function ProductDetailsContent({ params }: Props) {
           <h1>{product.product_name || "Unnamed Product"}</h1>
 
           <p className="product-number">
+            <UiIcon name="tag" size={14} />
             Item No. {product.item_number}
           </p>
 
@@ -93,17 +96,17 @@ async function ProductDetailsContent({ params }: Props) {
 
           <div className="details-table">
             <div>
-              <span>Brand</span>
+              <span><UiIcon name="tag" size={15} /> Brand</span>
               <strong>{product.brand || "—"}</strong>
             </div>
             <div>
-              <span>Unit</span>
+              <span><UiIcon name="box" size={15} /> Unit</span>
               <strong>{product.unit || "—"}</strong>
             </div>
             <div>
-              <span>Stock</span>
+              <span><UiIcon name="box" size={15} /> Stock</span>
               <strong>
-                {product.quantity === 0
+                {product.quantity != null && product.quantity <= 0
                   ? "No stock available"
                   : product.quantity ?? "—"}
               </strong>
@@ -114,7 +117,8 @@ async function ProductDetailsContent({ params }: Props) {
             href={`/inquiries?item=${encodeURIComponent(product.item_number)}`}
             className="button button-dark inquiry-button"
           >
-            Inquire About This Product →
+            <UiIcon name="mail" size={16} />
+            Inquire About This Product
           </Link>
           <AddToCartButton
             product={{

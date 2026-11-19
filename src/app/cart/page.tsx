@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useCart } from "@/components/cart-context";
+import UiIcon from "@/components/ui-icon";
 
 export default function CartPage() {
   const { items, removeProduct } = useCart();
@@ -34,14 +35,17 @@ export default function CartPage() {
           </p>
         </div>
         <Link href="/products" className="text-link">
-          Continue browsing →
+          Continue browsing <UiIcon name="arrow-right" size={15} />
         </Link>
       </div>
 
       <p className="cart-warning" role="note">
-        <strong>Important:</strong> Products added to your cart are kept only
-        while this website remains open. Reloading the website will clear your
-        cart.
+        <UiIcon name="info" size={19} />
+        <span>
+          <strong>Important:</strong> Products added to your cart are kept only
+          while this website remains open. Reloading the website will clear
+          your cart.
+        </span>
       </p>
 
       {items.length > 0 ? (
@@ -60,7 +64,10 @@ export default function CartPage() {
                 <div className="cart-item-info">
                   <p className="product-brand">{item.brand || "CTRLA"}</p>
                   <h2>{item.name || "Unnamed Product"}</h2>
-                  <p className="product-number">Item No. {item.itemNumber}</p>
+                  <p className="product-number">
+                    <UiIcon name="tag" size={14} />
+                    Item No. {item.itemNumber}
+                  </p>
                 </div>
                 <strong className="cart-item-price">
                   {item.sellingPrice != null
@@ -93,7 +100,8 @@ export default function CartPage() {
             </p>
             {selectedProducts.length > 0 ? (
               <Link href={inquiryHref} className="button button-dark">
-                Inquire About Selected Products →
+                Inquire About Selected Products
+                <UiIcon name="arrow-right" size={17} />
               </Link>
             ) : (
               <button type="button" className="button button-dark" disabled>
@@ -109,6 +117,7 @@ export default function CartPage() {
             Add products from the catalog to prepare an inquiry.
           </p>
           <Link href="/products" className="button button-dark">
+            <UiIcon name="grid" size={16} />
             Browse Products
           </Link>
         </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import UiIcon from "@/components/ui-icon";
 
 export default function InquiryForm({
   productItem = "",
@@ -74,7 +75,8 @@ export default function InquiryForm({
       </label>
 
       <button type="submit" className="button button-dark">
-        Send Inquiry →
+        <UiIcon name="mail" size={16} />
+        Send Inquiry
       </button>
 
       <p className="muted form-note">

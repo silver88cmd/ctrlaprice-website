@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import ProductCard from "../../components/product_card";
 import { supabase } from "@/lib/supabase";
 import { getBrands, type Product } from "@/lib/products";
+import UiIcon from "@/components/ui-icon";
 
 const PAGE_SIZE = 12;
 
@@ -117,12 +118,13 @@ async function ProductsPageContent({ searchParams }: Props) {
         {brand && <input type="hidden" name="brand" value={brand} />}
 
         <button className="button button-dark" type="submit">
+          <UiIcon name="search" size={16} />
           Search
         </button>
 
         {(search || brand) && (
           <Link href="/products" className="clear-link">
-            Clear filters
+            Clear filters <UiIcon name="arrow-right" size={14} />
           </Link>
         )}
       </form>
@@ -152,6 +154,7 @@ async function ProductsPageContent({ searchParams }: Props) {
 
       <div className="results-heading">
         <p>
+          <UiIcon name="box" size={16} />
           Showing <strong>{products.length}</strong> of{" "}
           <strong>{totalProducts}</strong> products
         </p>
@@ -172,6 +175,9 @@ async function ProductsPageContent({ searchParams }: Props) {
         </div>
       ) : (
         <div className="empty-state">
+          <span className="empty-state-icon">
+            <UiIcon name="search" size={24} />
+          </span>
           <h2>No products found</h2>
           <p>Try a different search term or category.</p>
         </div>
@@ -205,7 +211,7 @@ async function ProductsPageContent({ searchParams }: Props) {
               })}
               className="pagination-link"
             >
-              Next
+              Next <UiIcon name="arrow-right" size={14} />
             </Link>
           ) : (
             <span className="pagination-link pagination-disabled">Next</span>

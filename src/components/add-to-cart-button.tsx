@@ -1,6 +1,7 @@
 "use client";
 
 import { useCart, type CartProduct } from "@/components/cart-context";
+import UiIcon from "@/components/ui-icon";
 
 export default function AddToCartButton({
   product,
@@ -17,6 +18,7 @@ export default function AddToCartButton({
       onClick={() => addProduct(product)}
       disabled={isAdded}
     >
+      <UiIcon name={isAdded ? "box" : "cart"} size={17} />
       {isAdded ? "Added to Cart" : "Add to Cart"}
     </button>
   );

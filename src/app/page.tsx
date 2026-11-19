@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ProductCard from "../components/product_card";
 import { getProducts } from "@/lib/products";
+import UiIcon from "@/components/ui-icon";
 
 export default async function HomePage() {
   const products = await getProducts(8);
@@ -23,7 +24,7 @@ export default async function HomePage() {
           </p>
 
           <Link href="/products" className="button button-light">
-            Explore Products →
+            Explore Products <UiIcon name="arrow-right" size={17} />
           </Link>
         </div>
       </section>
@@ -37,7 +38,7 @@ export default async function HomePage() {
             </div>
 
             <Link href="/products" className="text-link">
-              Browse catalog →
+              Browse catalog <UiIcon name="arrow-right" size={15} />
             </Link>
           </div>
 
@@ -65,7 +66,7 @@ export default async function HomePage() {
         </div>
 
         <Link href="/inquiries" className="button button-dark">
-          Make an Inquiry →
+          Make an Inquiry <UiIcon name="mail" size={16} />
         </Link>
       </section>
     </>
