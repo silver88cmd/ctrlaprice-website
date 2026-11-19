@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import CartLink from "@/components/cart-link";
 import { CartProvider } from "@/components/cart-context";
+import SiteNavigation from "@/components/site-navigation";
 import "./globals.css";
 
 const currentYear = 2026;
@@ -36,13 +36,7 @@ export default function RootLayout({
                 </span>
               </Link>
 
-              <nav className="main-nav">
-                <Link href="/">Home</Link>
-                <Link href="/products">Products</Link>
-                <Link href="/inquiries">Inquiries</Link>
-                <CartLink />
-              </nav>
-
+              <SiteNavigation />
             </div>
           </header>
 
